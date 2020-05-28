@@ -29,28 +29,17 @@ public class HuaWeiPushPlugin : FlutterPlugin, MethodCallHandler {
         channel.setMethodCallHandler(this);
     }
 
-    // This static function is optional and equivalent to onAttachedToEngine. It supports the old
-    // pre-Flutter-1.12 Android projects. You are encouraged to continue supporting
-    // plugin registration via this function while apps migrate to use the new Android APIs
-    // post-flutter-1.12 via https://flutter.dev/go/android-project-migration.
-    //
-    // It is encouraged to share logic between onAttachedToEngine and registerWith to keep
-    // them functionally equivalent. Only one of onAttachedToEngine or registerWith will be called
-    // depending on the user's project. onAttachedToEngine or registerWith must both be defined
-    // in the same class.
-    companion object {
-        @JvmStatic
-        fun registerWith(registrar: Registrar) {
-            val channel = MethodChannel(registrar.messenger(), "hua_wei_push_plugin")
-            channel.setMethodCallHandler(HuaWeiPushPlugin())
-        }
-    }
-
     override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
-        if (call.method == "getPlatformVersion") {
-            result.success("Android ${android.os.Build.VERSION.RELEASE}")
-        } else {
-            result.notImplemented()
+        when (call.method) {
+            "getToken" -> {
+                this.getToken(call, result)
+            }
+            "deleteToken" -> {
+                this.deleteToken(call, result)
+            }
+            else -> {
+                result.notImplemented()
+            }
         }
     }
 
@@ -62,7 +51,7 @@ public class HuaWeiPushPlugin : FlutterPlugin, MethodCallHandler {
      * 获得 Push Token
      */
     private fun getToken(@NonNull call: MethodCall, @NonNull result: Result) {
-        val appId = ""
+        val appId: String? = call.argument("appId")
         result.success(hmsInstance.getToken(appId, HmsMessaging.DEFAULT_TOKEN_SCOPE))
     }
 
@@ -70,7 +59,7 @@ public class HuaWeiPushPlugin : FlutterPlugin, MethodCallHandler {
      * 删除 Push Token
      */
     private fun deleteToken(@NonNull call: MethodCall, @NonNull result: Result) {
-        val appId = ""
+        val appId: String? = call.argument("appId")
         hmsInstance.deleteToken(appId, HmsMessaging.DEFAULT_TOKEN_SCOPE)
         result.success(null)
     }
