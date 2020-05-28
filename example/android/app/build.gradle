@@ -60,4 +60,7 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.huawei.agconnect:agconnect-core:1.0.0.300'
 }
+
+apply plugin: 'com.huawei.agconnect'

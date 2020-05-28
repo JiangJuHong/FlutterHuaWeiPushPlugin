@@ -1,0 +1,12 @@
+{
+	"client":{
+		"cp_id":"890086000102176873",
+		"product_id":"736430079244480516",
+		"client_id":"372501848172528768",
+		"client_secret":"DFDB5F34CF9F99D9D769607085171B93CF3D28CA9199B007DE9AC77C043C13F1",
+		"app_id":"102304633",
+		"package_name":"top.huic.hua_wei_push_plugin_example",
+		"api_key":"CV73XknqxlwrwZF79v3daVwoncMJ7AJxmnVS8qCqVde2WQV2AGMMo2B26MBe4fq8S1ZdgERQAQUPUXAVFhRuFZYr1URp"
+	},
+	"configuration_version":"1.0"
+}
