@@ -14,9 +14,17 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  TextEditingController controller = TextEditingController();
+
+  Map<String, Function> methods = {};
+
   @override
   void initState() {
     super.initState();
+    this.methods = {
+      "getToken": () async => controller.text = await HuaWeiPushPlugin.getToken(),
+      "deleteToken": () async => controller.text = await HuaWeiPushPlugin.getToken(),
+    };
   }
 
   @override
@@ -27,6 +35,28 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
+          child: Column(
+            children: <Widget>[
+              TextField(
+                controller: controller,
+                maxLines: 10,
+              ),
+              Expanded(
+                child: Wrap(
+                  runSpacing: 10,
+                  spacing: 10,
+                  children: methods.keys
+                      .map(
+                        (key) => RaisedButton(
+                      onPressed: methods[key],
+                      child: Text(key),
+                    ),
+                  )
+                      .toList(),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

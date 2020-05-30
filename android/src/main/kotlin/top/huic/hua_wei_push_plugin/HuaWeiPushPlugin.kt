@@ -1,16 +1,14 @@
 package top.huic.hua_wei_push_plugin
 
 import android.content.Context
-import androidx.annotation.NonNull;
+import androidx.annotation.NonNull
 import com.huawei.hms.aaid.HmsInstanceId
 import com.huawei.hms.push.HmsMessaging
-
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import io.flutter.plugin.common.PluginRegistry.Registrar
 
 /** HuaWeiPushPlugin */
 public class HuaWeiPushPlugin : FlutterPlugin, MethodCallHandler {
@@ -52,7 +50,11 @@ public class HuaWeiPushPlugin : FlutterPlugin, MethodCallHandler {
      */
     private fun getToken(@NonNull call: MethodCall, @NonNull result: Result) {
         val appId: String? = call.argument("appId")
-        result.success(hmsInstance.getToken(appId, HmsMessaging.DEFAULT_TOKEN_SCOPE))
+        object : Thread() {
+            override fun run() {
+                result.success(hmsInstance.getToken(appId, HmsMessaging.DEFAULT_TOKEN_SCOPE))
+            }
+        }.start()
     }
 
     /**
@@ -60,7 +62,11 @@ public class HuaWeiPushPlugin : FlutterPlugin, MethodCallHandler {
      */
     private fun deleteToken(@NonNull call: MethodCall, @NonNull result: Result) {
         val appId: String? = call.argument("appId")
-        hmsInstance.deleteToken(appId, HmsMessaging.DEFAULT_TOKEN_SCOPE)
-        result.success(null)
+        object : Thread() {
+            override fun run() {
+                hmsInstance.deleteToken(appId, HmsMessaging.DEFAULT_TOKEN_SCOPE)
+                result.success(null)
+            }
+        }.start()
     }
 }
