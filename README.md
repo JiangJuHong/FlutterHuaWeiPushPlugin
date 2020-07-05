@@ -77,6 +77,12 @@ hua_wei_push_plugin: ^[最新版本号]
 | deleteAAID  | 删除AAID | -
 | getAppId  | 获得AppId | -
 | getCreationTime  | 获得创建时间 | -
-| getValue  | 获得`agconnect-services.json`文件的值,不同层级以 / 分开，例如 : client/package_name | key
+| getValue  | 获得`agconnect-services.json`文件的值,不同层级以 / 分开，例如 : client/package_name | String key
+| turnOnPush  | 启用推送 | -
+| turnOffPush  | 关闭推送 | -
+| subscribe  | 订阅 | String topic
+| unsubscribe  | 取消订阅 | String topic
+| setAutoInitEnabled  | 设置自动初始化 | bool enabled
+| isAutoInitEnabled  | 是否启用自动初始化 | -
 
 ### 监听器

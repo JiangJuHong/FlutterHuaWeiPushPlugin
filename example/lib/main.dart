@@ -36,6 +36,19 @@ class _MyAppState extends State<MyApp> {
       "getAppId": () async => controller.text = await HuaWeiPushPlugin.getAppId(),
       "getCreationTime": () async => controller.text = "${await HuaWeiPushPlugin.getCreationTime()}",
       "getValue(client/package_name)": () async => controller.text = "${await HuaWeiPushPlugin.getValue("client/package_name")}",
+      "turnOnPush": () async => controller.text = "${await HuaWeiPushPlugin.turnOnPush()}",
+      "turnOffPush": () async => controller.text = "${await HuaWeiPushPlugin.turnOffPush()}",
+      "subscribe(123)": () async => controller.text = "${await HuaWeiPushPlugin.subscribe("123")}",
+      "unsubscribe(123)": () async => controller.text = "${await HuaWeiPushPlugin.unsubscribe("123")}",
+      "setAutoInitEnabled(true)": () async {
+        await HuaWeiPushPlugin.setAutoInitEnabled(true);
+        controller.text = "启用成功";
+      },
+      "setAutoInitEnabled(false)": () async {
+        await HuaWeiPushPlugin.setAutoInitEnabled(false);
+        controller.text = "关闭成功";
+      },
+      "isAutoInitEnabled": () async => controller.text = "${await HuaWeiPushPlugin.isAutoInitEnabled()}",
     };
   }
 

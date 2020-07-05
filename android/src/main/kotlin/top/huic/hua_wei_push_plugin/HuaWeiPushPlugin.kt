@@ -25,10 +25,12 @@ public class HuaWeiPushPlugin : FlutterPlugin, MethodCallHandler {
     private lateinit var channel: MethodChannel
     private lateinit var context: Context
     private lateinit var hmsInstance: HmsInstanceId
+    private lateinit var hmsMessaging: HmsMessaging
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         context = flutterPluginBinding.applicationContext
         hmsInstance = HmsInstanceId.getInstance(context)
+        hmsMessaging = HmsMessaging.getInstance(context)
         channel = MethodChannel(flutterPluginBinding.getFlutterEngine().getDartExecutor(), "hua_wei_push_plugin")
         channel.setMethodCallHandler(this);
     }
@@ -58,6 +60,24 @@ public class HuaWeiPushPlugin : FlutterPlugin, MethodCallHandler {
             }
             "getValue" -> {
                 this.getValue(call, result)
+            }
+            "turnOnPush" -> {
+                this.turnOnPush(call, result)
+            }
+            "turnOffPush" -> {
+                this.turnOffPush(call, result)
+            }
+            "subscribe" -> {
+                this.subscribe(call, result)
+            }
+            "unsubscribe" -> {
+                this.unsubscribe(call, result)
+            }
+            "setAutoInitEnabled" -> {
+                this.setAutoInitEnabled(call, result)
+            }
+            "isAutoInitEnabled" -> {
+                this.isAutoInitEnabled(call, result)
             }
             else -> {
                 result.notImplemented()
@@ -147,5 +167,75 @@ public class HuaWeiPushPlugin : FlutterPlugin, MethodCallHandler {
     private fun getValue(@NonNull call: MethodCall, @NonNull result: Result) {
         val key: String = CommonUtil.getParam(call, result, "key")
         result.success(AGConnectServicesConfig.fromContext(context).getString(key))
+    }
+
+    /**
+     * 启用推送
+     */
+    private fun turnOnPush(@NonNull call: MethodCall, @NonNull result: Result) {
+        try {
+            hmsMessaging.turnOnPush().addOnCompleteListener { task: Task<Void?> ->
+                result.success(task.isSuccessful)
+            }
+        } catch (e: Exception) {
+            result.error("-1", e.message, e.message)
+        }
+    }
+
+    /**
+     * 禁用推送
+     */
+    private fun turnOffPush(@NonNull call: MethodCall, @NonNull result: Result) {
+        try {
+            hmsMessaging.turnOffPush().addOnCompleteListener { task: Task<Void?> ->
+                result.success(task.isSuccessful)
+            }
+        } catch (e: Exception) {
+            result.error("-1", e.message, e.message)
+        }
+    }
+
+    /**
+     * 订阅
+     */
+    private fun subscribe(@NonNull call: MethodCall, @NonNull result: Result) {
+        val topic: String = CommonUtil.getParam(call, result, "topic");
+        try {
+            hmsMessaging.subscribe(topic).addOnCompleteListener { task: Task<Void?> ->
+                result.success(task.isSuccessful);
+            }
+        } catch (e: Exception) {
+            result.error("-1", e.message, e.cause)
+        }
+    }
+
+    /**
+     * 取消订阅
+     */
+    private fun unsubscribe(@NonNull call: MethodCall, @NonNull result: Result) {
+        val topic: String = CommonUtil.getParam(call, result, "topic");
+        try {
+            hmsMessaging.unsubscribe(topic).addOnCompleteListener { task: Task<Void?> ->
+                result.success(task.isSuccessful);
+            }
+        } catch (e: Exception) {
+            result.error("-1", e.message, e.cause)
+        }
+    }
+
+    /**
+     * 设置自动初始化
+     */
+    private fun setAutoInitEnabled(@NonNull call: MethodCall, @NonNull result: Result) {
+        val enabled: Boolean = CommonUtil.getParam(call, result, "enabled");
+        hmsMessaging.isAutoInitEnabled = enabled;
+        result.success(null)
+    }
+
+    /**
+     * 是否启用自动初始化
+     */
+    private fun isAutoInitEnabled(@NonNull call: MethodCall, @NonNull result: Result) {
+        result.success(hmsMessaging.isAutoInitEnabled)
     }
 }

@@ -58,4 +58,44 @@ class HuaWeiPushPlugin {
       "key": key,
     });
   }
+
+  /// 启用推送
+  static Future<bool> turnOnPush() async {
+    return await _channel.invokeMethod('turnOnPush');
+  }
+
+  /// 禁用推送
+  static Future<bool> turnOffPush() async {
+    return await _channel.invokeMethod('turnOffPush');
+  }
+
+  /// 订阅
+  /// [topic] 话题
+  static Future<bool> subscribe(String topic) async {
+    return await _channel.invokeMethod('subscribe', {
+      "topic": topic,
+    });
+  }
+
+  /// 取消订阅
+  /// [topic] 话题
+  static Future<bool> unsubscribe(String topic) async {
+    return await _channel.invokeMethod('unsubscribe', {
+      "topic": topic,
+    });
+  }
+
+  /// 设置自动初始化
+  /// [enabled] 是否启用
+  static Future<void> setAutoInitEnabled(bool enabled) async {
+    return await _channel.invokeMethod('setAutoInitEnabled', {
+      "enabled": enabled,
+    });
+  }
+
+  /// 设置自动初始化
+  /// [enabled] 是否启用
+  static Future<bool> isAutoInitEnabled() async {
+    return await _channel.invokeMethod('isAutoInitEnabled');
+  }
 }
