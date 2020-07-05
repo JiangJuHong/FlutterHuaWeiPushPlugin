@@ -45,11 +45,24 @@ android {
         versionName flutterVersionName
     }
 
+    signingConfigs {
+        config {
+            storeFile file('android.keystore')
+            storePassword '123456'
+            keyAlias 'android_test_key'
+            keyPassword '123456'
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+        }
         release {
-            // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.config
         }
     }
 }
@@ -61,3 +74,4 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+apply plugin: 'com.huawei.agconnect'
