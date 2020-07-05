@@ -1,4 +1,4 @@
-package top.huic.hua_wei_push_plugin;
+package top.huic.hua_wei_push_plugin.util;
 
 import android.os.Handler;
 import android.os.Looper;

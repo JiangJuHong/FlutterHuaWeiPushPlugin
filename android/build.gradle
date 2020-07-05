@@ -33,6 +33,9 @@ android {
     }
     defaultConfig {
         minSdkVersion 17
+
+        // library 混淆 -> 随 library 引用，自动添加到 apk 打包混淆
+        consumerProguardFiles 'consumer-proguard-rules.txt'
     }
     lintOptions {
         disable 'InvalidPackage'
