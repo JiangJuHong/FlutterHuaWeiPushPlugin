@@ -47,11 +47,11 @@ Flutter Version >= 1.12
        repositories {
            google()
            jcenter()
-         + maven {url 'https://developer.huawei.com/repo/'}
+   +       maven {url 'https://developer.huawei.com/repo/'}
        }
    
        dependencies {
-         + classpath 'com.huawei.agconnect:agcp:1.2.1.301'
+   +       classpath 'com.huawei.agconnect:agcp:1.2.1.301'
        }
    }
    ````
