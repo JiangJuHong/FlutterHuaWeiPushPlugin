@@ -23,7 +23,19 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     this.methods = {
       "getToken": () async => controller.text = await HuaWeiPushPlugin.getToken(),
-      "deleteToken": () async => controller.text = await HuaWeiPushPlugin.getToken(),
+      "deleteToken": () async {
+        await HuaWeiPushPlugin.deleteToken();
+        controller.text = "删除成功!";
+      },
+      "getId": () async => controller.text = await HuaWeiPushPlugin.getId(),
+      "getAAID": () async => controller.text = await HuaWeiPushPlugin.getAAID(),
+      "deleteAAID": () async {
+        await HuaWeiPushPlugin.deleteAAID();
+        controller.text = "删除成功!";
+      },
+      "getAppId": () async => controller.text = await HuaWeiPushPlugin.getAppId(),
+      "getCreationTime": () async => controller.text = "${await HuaWeiPushPlugin.getCreationTime()}",
+      "getValue(client/package_name)": () async => controller.text = "${await HuaWeiPushPlugin.getValue("client/package_name")}",
     };
   }
 
@@ -48,10 +60,10 @@ class _MyAppState extends State<MyApp> {
                   children: methods.keys
                       .map(
                         (key) => RaisedButton(
-                      onPressed: methods[key],
-                      child: Text(key),
-                    ),
-                  )
+                          onPressed: methods[key],
+                          child: Text(key),
+                        ),
+                      )
                       .toList(),
                 ),
               ),

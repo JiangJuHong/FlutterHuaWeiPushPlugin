@@ -72,3 +72,11 @@ hua_wei_push_plugin: ^[最新版本号]
 |  ----  | ----  | ----  |
 | getToken  | 获得Push Token | { appId: APP_ID }
 | deleteToken  | 删除 Push Token | { appId: APP_ID }
+| getId  | 获得ID | -
+| getAAID  | 获得AAID | -
+| deleteAAID  | 删除AAID | -
+| getAppId  | 获得AppId | -
+| getCreationTime  | 获得创建时间 | -
+| getValue  | 获得`agconnect-services.json`文件的值,不同层级以 / 分开，例如 : client/package_name | key
+
+### 监听器
