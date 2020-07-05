@@ -2,7 +2,9 @@ package top.huic.hua_wei_push_plugin
 
 import android.content.Context
 import androidx.annotation.NonNull
+import com.huawei.agconnect.config.AGConnectServicesConfig
 import com.huawei.hms.aaid.HmsInstanceId
+import com.huawei.hms.common.ApiException
 import com.huawei.hms.push.HmsMessaging
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
@@ -52,7 +54,11 @@ public class HuaWeiPushPlugin : FlutterPlugin, MethodCallHandler {
         val appId: String? = call.argument("appId")
         object : Thread() {
             override fun run() {
-                result.success(hmsInstance.getToken(appId, HmsMessaging.DEFAULT_TOKEN_SCOPE))
+                try {
+                    CommonUtil.runMainThreadReturn(result,hmsInstance.getToken(appId, HmsMessaging.DEFAULT_TOKEN_SCOPE))
+                } catch (e: ApiException) {
+                    CommonUtil.runMainThreadReturnError(result,e.statusCode.toString(), e.message, e.message)
+                }
             }
         }.start()
     }
@@ -65,7 +71,7 @@ public class HuaWeiPushPlugin : FlutterPlugin, MethodCallHandler {
         object : Thread() {
             override fun run() {
                 hmsInstance.deleteToken(appId, HmsMessaging.DEFAULT_TOKEN_SCOPE)
-                result.success(null)
+                CommonUtil.runMainThreadReturn(result,null);
             }
         }.start()
     }
