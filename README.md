@@ -18,25 +18,25 @@ Flutter Version >= 1.12
    ````diff
    android {
    
-     + signingConfigs {
-     +     config {
-     +         storeFile file('android.keystore')
-     +         storePassword '123456'
-     +         keyAlias 'android_test_key'
-     +         keyPassword '123456'
-     +         v1SigningEnabled true
-     +         v2SigningEnabled true
-     +     }
-     + }
+   +   signingConfigs {
+   +       config {
+   +           storeFile file('android.keystore')
+   +           storePassword '123456'
+   +           keyAlias 'android_test_key'
+   +           keyPassword '123456'
+   +           v1SigningEnabled true
+   +           v2SigningEnabled true
+   +       }
+   +   }
    
        buildTypes {
-     +     debug {
-     +         signingConfig signingConfigs.config
-     +     }
-     +     release {
-     +         // Signing with the debug keys for now, so `flutter run --release` works.
-     +         signingConfig signingConfigs.config
-     +     }
+   +       debug {
+   +           signingConfig signingConfigs.config
+   +       }
+   +       release {
+   +           // Signing with the debug keys for now, so `flutter run --release` works.
+   +           signingConfig signingConfigs.config
+   +       }
        }
    }
    ````
