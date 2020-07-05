@@ -8,7 +8,7 @@ Flutter Version >= 1.12
 如果非华为手机测试，则必须在 手机上安装 `华为移动服务（HMS Core）`，否则会报:`Failed to find HMS apk`错误，如果华为移动服务版本过低或权限不足(建议授予所有权限)，会报:`client api invalid`
 
 ## 配置
-0. 生成证书(如果有则忽略)，并前往 华为开发者中心 \[项目-应用\] 中配置 `SHA256证书指纹`
+0. 生成证书 [证书生成教程](https://developer.huawei.com/consumer/cn/doc/development/HMS-Guides/game-preparation-v4#certificate)，并前往 华为开发者中心 \[项目-应用\] 中配置 `SHA256证书指纹`
 0. 修改 `android\app\build.gradle` 文件  
    在末尾加入
    ````diff
