@@ -25,7 +25,7 @@ public class CustomHmsMessageService extends HmsMessageService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
-        this.invokeListener(HuaWeiPushListenerTypeEnum.MessageSent, remoteMessage.getDataOfMap());
+        this.invokeListener(HuaWeiPushListenerTypeEnum.MessageReceived, remoteMessage.getDataOfMap());
     }
 
     /**
@@ -117,7 +117,13 @@ public class CustomHmsMessageService extends HmsMessageService {
     private void invokeListener(HuaWeiPushListenerTypeEnum type, Object params) {
         Map<String, String> data = new HashMap<>(2, 1);
         data.put("type", type.name());
-        data.put("params", params != null ? JSON.toJSONString(params) : "");
+        if (params != null) {
+            if (params instanceof String || params instanceof Number || params instanceof Boolean) {
+                data.put("params", params.toString());
+            } else {
+                data.put("params", JSON.toJSONString(params));
+            }
+        }
         HuaWeiPushPlugin.channel.invokeMethod("onListener", data);
     }
 }

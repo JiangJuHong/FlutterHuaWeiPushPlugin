@@ -3,8 +3,11 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
+import 'hua_wei_push_plugin_listener.dart';
+
 class HuaWeiPushPlugin {
   static const MethodChannel _channel = const MethodChannel('hua_wei_push_plugin');
+  static HuaWeiPushPluginListener listener = HuaWeiPushPluginListener(_channel);
 
   /// 获得推送Token
   /// [appId] 官网应用的appId，如果不传，则默认走 agconnect-services.json 文件读取
@@ -97,5 +100,15 @@ class HuaWeiPushPlugin {
   /// [enabled] 是否启用
   static Future<bool> isAutoInitEnabled() async {
     return await _channel.invokeMethod('isAutoInitEnabled');
+  }
+
+  /// 添加消息监听
+  static void addListener(ListenerValue func) {
+    listener.addListener(func);
+  }
+
+  /// 移除消息监听
+  static void removeListener(ListenerValue func) {
+    listener.removeListener(func);
   }
 }

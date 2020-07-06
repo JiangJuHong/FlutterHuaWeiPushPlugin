@@ -21,6 +21,10 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    HuaWeiPushPlugin.addListener((type, params) {
+      controller.text = controller.text + "\n" + "收到监听器：$type，值为:$params";
+    });
+
     this.methods = {
       "getToken": () async => controller.text = await HuaWeiPushPlugin.getToken(),
       "deleteToken": () async {
