@@ -22,10 +22,13 @@ public class HuaWeiPushPlugin : FlutterPlugin, MethodCallHandler {
     ///
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
-    private lateinit var channel: MethodChannel
     private lateinit var context: Context
     private lateinit var hmsInstance: HmsInstanceId
     private lateinit var hmsMessaging: HmsMessaging
+
+    companion object {
+        lateinit var channel: MethodChannel
+    }
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         context = flutterPluginBinding.applicationContext

@@ -86,3 +86,14 @@ hua_wei_push_plugin: ^[最新版本号]
 | isAutoInitEnabled  | 是否启用自动初始化 | -
 
 ### 监听器
+添加监听器:`HuaWeiPushPlugin.addListener`，移除监听器:`HuaWeiPushPlugin.removeListener`  
+监听器方法原形: `typedef ListenerValue<P> = void Function(HuaWeiPushListenerTypeEnum type, P params);`
+
+|  类型   | 说明  | 参数格式  | 
+|  ----  | ----  | ----  |
+| MessageReceived  | 接收透传消息 | Map
+| MessageSent  | 发送上行消息成功回调方法 | String
+| MessageDelivered  | 发送上行消息时如果使用了消息回执能力，消息到达App服务器后，App服务器的应答消息通过本方法回调给应用。 | MessageExceptionEntity
+| SendError  | 发送上行消息失败回调方法 | MessageExceptionEntity
+| NewToken  | 服务端更新token回调方法。 | String
+| TokenError  | 申请token失败回调方法。 | ExceptionEntity

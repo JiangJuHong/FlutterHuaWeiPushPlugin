@@ -1,8 +1,15 @@
 package top.huic.hua_wei_push_plugin;
 
 
+import com.alibaba.fastjson.JSON;
+import com.huawei.hms.push.BaseException;
 import com.huawei.hms.push.HmsMessageService;
 import com.huawei.hms.push.RemoteMessage;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import top.huic.hua_wei_push_plugin.enums.HuaWeiPushListenerTypeEnum;
 
 /**
  * 自定义华为消息服务
@@ -18,6 +25,7 @@ public class CustomHmsMessageService extends HmsMessageService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
+        this.invokeListener(HuaWeiPushListenerTypeEnum.MessageSent, remoteMessage.getDataOfMap());
     }
 
     /**
@@ -28,6 +36,7 @@ public class CustomHmsMessageService extends HmsMessageService {
     @Override
     public void onMessageSent(String s) {
         super.onMessageSent(s);
+        this.invokeListener(HuaWeiPushListenerTypeEnum.MessageSent, s);
     }
 
     /**
@@ -39,6 +48,16 @@ public class CustomHmsMessageService extends HmsMessageService {
     @Override
     public void onMessageDelivered(String s, Exception e) {
         super.onMessageDelivered(s, e);
+        BaseException exception = (BaseException) e;
+
+        Map<String, Object> params = new HashMap<>(2, 1);
+        params.put("code", exception.getErrorCode());
+        params.put("message", exception.getMessage());
+
+        Map<String, Object> data = new HashMap<>(2, 1);
+        data.put("id", s);
+        data.put("err", params);
+        this.invokeListener(HuaWeiPushListenerTypeEnum.MessageDelivered, data);
     }
 
     /**
@@ -50,6 +69,16 @@ public class CustomHmsMessageService extends HmsMessageService {
     @Override
     public void onSendError(String s, Exception e) {
         super.onSendError(s, e);
+
+        BaseException exception = (BaseException) e;
+        Map<String, Object> params = new HashMap<>(2, 1);
+        params.put("code", exception.getErrorCode());
+        params.put("message", exception.getMessage());
+
+        Map<String, Object> data = new HashMap<>(2, 1);
+        data.put("id", s);
+        data.put("err", params);
+        this.invokeListener(HuaWeiPushListenerTypeEnum.SendError, data);
     }
 
     /**
@@ -60,6 +89,7 @@ public class CustomHmsMessageService extends HmsMessageService {
     @Override
     public void onNewToken(String s) {
         super.onNewToken(s);
+        this.invokeListener(HuaWeiPushListenerTypeEnum.NewToken, s);
     }
 
     /**
@@ -70,5 +100,24 @@ public class CustomHmsMessageService extends HmsMessageService {
     @Override
     public void onTokenError(Exception e) {
         super.onTokenError(e);
+
+        BaseException exception = (BaseException) e;
+        Map<String, Object> params = new HashMap<>(2, 1);
+        params.put("code", exception.getErrorCode());
+        params.put("message", exception.getMessage());
+        this.invokeListener(HuaWeiPushListenerTypeEnum.TokenError, params);
+    }
+
+    /**
+     * 调用监听器
+     *
+     * @param type   类型
+     * @param params 参数
+     */
+    private void invokeListener(HuaWeiPushListenerTypeEnum type, Object params) {
+        Map<String, String> data = new HashMap<>(2, 1);
+        data.put("type", type.name());
+        data.put("params", params != null ? JSON.toJSONString(params) : "");
+        HuaWeiPushPlugin.channel.invokeMethod("onListener", data);
     }
 }
