@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
 import 'package:hua_wei_push_plugin/hua_wei_push_plugin.dart';
 
 void main() {

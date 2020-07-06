@@ -1,4 +1,6 @@
 # hua_wei_push_plugin
+[![pub package](https://img.shields.io/pub/v/hua_wei_push_plugin.svg)](https://pub.dartlang.org/packages/hua_wei_push_plugin)
+
 
 华为推送SDK Flutter插件  
 华为Push版本: v5.0.0.300

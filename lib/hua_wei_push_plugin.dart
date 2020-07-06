@@ -1,8 +1,5 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-
 import 'hua_wei_push_plugin_listener.dart';
 
 class HuaWeiPushPlugin {
