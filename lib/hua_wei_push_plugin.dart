@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'hua_wei_push_plugin_listener.dart';
 
 class HuaWeiPushPlugin {
-  static const MethodChannel _channel = const MethodChannel('hua_wei_push_plugin');
+  static const MethodChannel _channel =
+      const MethodChannel('hua_wei_push_plugin');
   static HuaWeiPushPluginListener listener = HuaWeiPushPluginListener(_channel);
 
   /// 获得推送Token

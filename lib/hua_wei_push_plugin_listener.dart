@@ -87,7 +87,8 @@ class HuaWeiPushPluginListener {
 }
 
 /// 监听器值模型
-typedef ListenerValue<P> = void Function(HuaWeiPushListenerTypeEnum type, P params);
+typedef ListenerValue<P> = void Function(
+    HuaWeiPushListenerTypeEnum type, P params);
 
 /// 监听器类型枚举
 enum HuaWeiPushListenerTypeEnum {
