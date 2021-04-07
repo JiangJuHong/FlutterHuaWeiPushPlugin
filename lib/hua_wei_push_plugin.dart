@@ -10,17 +10,17 @@ class HuaWeiPushPlugin {
   /// 获得推送Token
   /// [appId] 官网应用的appId，如果不传，则默认走 agconnect-services.json 文件读取
   static Future<String> getToken({
-    String appId,
+    String? appId,
   }) async {
-    return await _channel.invokeMethod('getToken', {
+    return await (_channel.invokeMethod('getToken', {
       "appId": appId,
-    });
+    }) as FutureOr<String>);
   }
 
   /// 删除推送Token
   /// [appId] 官网应用的appId，如果不传，则默认走 agconnect-services.json 文件读取
   static Future<void> deleteToken({
-    String appId,
+    String? appId,
   }) async {
     return await _channel.invokeMethod('deleteToken', {
       "appId": appId,
@@ -29,12 +29,12 @@ class HuaWeiPushPlugin {
 
   /// 获得 Id
   static Future<String> getId() async {
-    return await _channel.invokeMethod('getId');
+    return await (_channel.invokeMethod('getId') as FutureOr<String>);
   }
 
   /// 获得 AAID
   static Future<String> getAAID() async {
-    return await _channel.invokeMethod('getAAID');
+    return await (_channel.invokeMethod('getAAID') as FutureOr<String>);
   }
 
   /// 删除 AAID
@@ -44,12 +44,12 @@ class HuaWeiPushPlugin {
 
   /// 获得 AppId
   static Future<String> getAppId() async {
-    return await _channel.invokeMethod('getAppId');
+    return await (_channel.invokeMethod('getAppId') as FutureOr<String>);
   }
 
   /// 获得 CreationTime
   static Future<int> getCreationTime() async {
-    return await _channel.invokeMethod('getCreationTime');
+    return await (_channel.invokeMethod('getCreationTime') as FutureOr<int>);
   }
 
   /// 获得 agconnect-services.json 文件的值
@@ -62,28 +62,28 @@ class HuaWeiPushPlugin {
 
   /// 启用推送
   static Future<bool> turnOnPush() async {
-    return await _channel.invokeMethod('turnOnPush');
+    return await (_channel.invokeMethod('turnOnPush') as FutureOr<bool>);
   }
 
   /// 禁用推送
   static Future<bool> turnOffPush() async {
-    return await _channel.invokeMethod('turnOffPush');
+    return await (_channel.invokeMethod('turnOffPush') as FutureOr<bool>);
   }
 
   /// 订阅
   /// [topic] 话题
   static Future<bool> subscribe(String topic) async {
-    return await _channel.invokeMethod('subscribe', {
+    return await (_channel.invokeMethod('subscribe', {
       "topic": topic,
-    });
+    }) as FutureOr<bool>);
   }
 
   /// 取消订阅
   /// [topic] 话题
   static Future<bool> unsubscribe(String topic) async {
-    return await _channel.invokeMethod('unsubscribe', {
+    return await (_channel.invokeMethod('unsubscribe', {
       "topic": topic,
-    });
+    }) as FutureOr<bool>);
   }
 
   /// 设置自动初始化
@@ -97,7 +97,7 @@ class HuaWeiPushPlugin {
   /// 设置自动初始化
   /// [enabled] 是否启用
   static Future<bool> isAutoInitEnabled() async {
-    return await _channel.invokeMethod('isAutoInitEnabled');
+    return await (_channel.invokeMethod('isAutoInitEnabled') as FutureOr<bool>);
   }
 
   /// 添加消息监听

@@ -1,8 +1,8 @@
 import 'exception_entity.dart';
 
 class MessageExceptionEntity {
-  final String id;
-  final ExceptionEntity err;
+  final String? id;
+  final ExceptionEntity? err;
 
   MessageExceptionEntity({
     this.id,
@@ -18,6 +18,6 @@ class MessageExceptionEntity {
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'err': err == null ? null : err.toJson(),
+        'err': err == null ? null : err!.toJson(),
       };
 }

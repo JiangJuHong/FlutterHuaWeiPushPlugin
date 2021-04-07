@@ -13,7 +13,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   TextEditingController controller = TextEditingController();
 
-  Map<String, Function> methods = {};
+  Map<String, VoidCallback> methods = {};
 
   @override
   void initState() {
@@ -82,7 +82,7 @@ class _MyAppState extends State<MyApp> {
                   spacing: 10,
                   children: methods.keys
                       .map(
-                        (key) => RaisedButton(
+                        (key) => OutlinedButton(
                           onPressed: methods[key],
                           child: Text(key),
                         ),

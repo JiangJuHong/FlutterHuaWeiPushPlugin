@@ -1,12 +1,13 @@
 name: hua_wei_push_plugin
 description: This plug-in is packaged based on the huawei Push SDK(hms push), providing common methods and listeners
-version: 1.0.0
+version: 2.0.0
 author: 690717394@qq.com
 homepage: https://github.com/JiangJuHong/FlutterHuaWeiPushPlugin
+repository: https://github.com/JiangJuHong/FlutterHuaWeiPushPlugin
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
-  flutter: ">=1.10.0"
+  sdk: '>=2.12.0 <3.0.0'
+  flutter: ">=1.20.0"
 
 dependencies:
   flutter:
@@ -29,8 +30,6 @@ flutter:
     platforms:
       android:
         package: top.huic.hua_wei_push_plugin
-        pluginClass: HuaWeiPushPlugin
-      ios:
         pluginClass: HuaWeiPushPlugin
 
   # To add assets to your plugin package, add an assets section, like this:

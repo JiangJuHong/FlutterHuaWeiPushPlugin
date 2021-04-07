@@ -1,6 +1,6 @@
 class ExceptionEntity {
-  final int code;
-  final String message;
+  final int? code;
+  final String? message;
 
   ExceptionEntity({
     this.code,
