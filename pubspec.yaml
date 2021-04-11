@@ -1,6 +1,6 @@
 name: hua_wei_push_plugin
 description: This plug-in is packaged based on the huawei Push SDK(hms push), providing common methods and listeners
-version: 2.0.0
+version: 2.0.1
 author: 690717394@qq.com
 homepage: https://github.com/JiangJuHong/FlutterHuaWeiPushPlugin
 repository: https://github.com/JiangJuHong/FlutterHuaWeiPushPlugin

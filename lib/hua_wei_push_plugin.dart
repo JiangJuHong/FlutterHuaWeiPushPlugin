@@ -14,7 +14,7 @@ class HuaWeiPushPlugin {
   }) async {
     return await (_channel.invokeMethod('getToken', {
       "appId": appId,
-    }) as FutureOr<String>);
+    }));
   }
 
   /// 删除推送Token
@@ -29,12 +29,12 @@ class HuaWeiPushPlugin {
 
   /// 获得 Id
   static Future<String> getId() async {
-    return await (_channel.invokeMethod('getId') as FutureOr<String>);
+    return await (_channel.invokeMethod('getId'));
   }
 
   /// 获得 AAID
   static Future<String> getAAID() async {
-    return await (_channel.invokeMethod('getAAID') as FutureOr<String>);
+    return await (_channel.invokeMethod('getAAID'));
   }
 
   /// 删除 AAID
@@ -44,12 +44,12 @@ class HuaWeiPushPlugin {
 
   /// 获得 AppId
   static Future<String> getAppId() async {
-    return await (_channel.invokeMethod('getAppId') as FutureOr<String>);
+    return await (_channel.invokeMethod('getAppId'));
   }
 
   /// 获得 CreationTime
   static Future<int> getCreationTime() async {
-    return await (_channel.invokeMethod('getCreationTime') as FutureOr<int>);
+    return await (_channel.invokeMethod('getCreationTime'));
   }
 
   /// 获得 agconnect-services.json 文件的值
@@ -62,12 +62,12 @@ class HuaWeiPushPlugin {
 
   /// 启用推送
   static Future<bool> turnOnPush() async {
-    return await (_channel.invokeMethod('turnOnPush') as FutureOr<bool>);
+    return await (_channel.invokeMethod('turnOnPush'));
   }
 
   /// 禁用推送
   static Future<bool> turnOffPush() async {
-    return await (_channel.invokeMethod('turnOffPush') as FutureOr<bool>);
+    return await (_channel.invokeMethod('turnOffPush'));
   }
 
   /// 订阅
@@ -75,7 +75,7 @@ class HuaWeiPushPlugin {
   static Future<bool> subscribe(String topic) async {
     return await (_channel.invokeMethod('subscribe', {
       "topic": topic,
-    }) as FutureOr<bool>);
+    }));
   }
 
   /// 取消订阅
@@ -83,7 +83,7 @@ class HuaWeiPushPlugin {
   static Future<bool> unsubscribe(String topic) async {
     return await (_channel.invokeMethod('unsubscribe', {
       "topic": topic,
-    }) as FutureOr<bool>);
+    }));
   }
 
   /// 设置自动初始化
@@ -97,7 +97,7 @@ class HuaWeiPushPlugin {
   /// 设置自动初始化
   /// [enabled] 是否启用
   static Future<bool> isAutoInitEnabled() async {
-    return await (_channel.invokeMethod('isAutoInitEnabled') as FutureOr<bool>);
+    return await (_channel.invokeMethod('isAutoInitEnabled'));
   }
 
   /// 添加消息监听
